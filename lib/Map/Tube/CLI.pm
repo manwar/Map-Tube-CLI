@@ -1,14 +1,14 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION = '0.01';
+$Map::Tube::CLI::VERSION = '0.02';
 
 =head1 NAME
 
-Map::Tube::CLI - CLI for Map::Tube.
+Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
@@ -16,7 +16,6 @@ use 5.006;
 use Data::Dumper;
 use Module::Pluggable
     search_path => [ 'Map::Tube' ],
-    except      => qr/^Map::Tube::Plugin::*$/,
     require     => 1,
     inner       => 0,
     max_depth   => 3;
@@ -82,63 +81,63 @@ case insensitive i.e. 'London' and 'lOndOn' are the same.
 
 =over 4
 
-=item L<Barcelona|Map::Tube::Barcelona>
+=item * L<Barcelona|Map::Tube::Barcelona>
 
-=item L<Beijing|Map::Tube::Beijing>
+=item * L<Beijing|Map::Tube::Beijing>
 
-=item L<Berlin|Map::Tube::Berlin>
+=item * L<Berlin|Map::Tube::Berlin>
 
-=item L<Buchares|Map::Tube::Bucharest>
+=item * L<Buchares|Map::Tube::Bucharest>
 
-=item L<Budapest|Map::Tube::Budapest>
+=item * L<Budapest|Map::Tube::Budapest>
 
-=item L<Delhi|Map::Tube::Delhi>
+=item * L<Delhi|Map::Tube::Delhi>
 
-=item L<Dnipropetrovsk|Map::Tube::Dnipropetrovsk>
+=item * L<Dnipropetrovsk|Map::Tube::Dnipropetrovsk>
 
-=item L<Glasgow|Map::Tube::Glasgow>
+=item * L<Glasgow|Map::Tube::Glasgow>
 
-=item L<Kazan|Map::Tube::Kazan>
+=item * L<Kazan|Map::Tube::Kazan>
 
-=item L<Kharkiv|Map::Tube::Kharkiv>
+=item * L<Kharkiv|Map::Tube::Kharkiv>
 
-=item L<Kiev|Map::Tube::Kiev>
+=item * L<Kiev|Map::Tube::Kiev>
 
-=item L<KoelnBonn|Map::Tube::KoelnBonn>
+=item * L<KoelnBonn|Map::Tube::KoelnBonn>
 
-=item L<London|Map::Tube::London>
+=item * L<London|Map::Tube::London>
 
-=item L<Lyon|Map::Tube::Lyon>
+=item * L<Lyon|Map::Tube::Lyon>
 
-=item L<Minsk|Map::Tube::Minsk>
+=item * L<Minsk|Map::Tube::Minsk>
 
-=item L<Moscow|Map::Tube::Moscow>
+=item * L<Moscow|Map::Tube::Moscow>
 
-=item L<NYC|Map::Tube::NYC>
+=item * L<NYC|Map::Tube::NYC>
 
-=item L<Nanjing|Map::Tube::Nanjing>
+=item * L<Nanjing|Map::Tube::Nanjing>
 
-=item L<Novosibirsk|Map::Tube::Novosibirsk>
+=item * L<Novosibirsk|Map::Tube::Novosibirsk>
 
-=item L<Prague|Map::Tube::Prague>
+=item * L<Prague|Map::Tube::Prague>
 
-=item L<SaintPetersburg|Map::Tube::SaintPetersburg>
+=item * L<SaintPetersburg|Map::Tube::SaintPetersburg>
 
-=item L<Samara|Map::Tube::Samara>
+=item * L<Samara|Map::Tube::Samara>
 
-=item L<Singapore|Map::Tube::Singapore>
+=item * L<Singapore|Map::Tube::Singapore>
 
-=item L<Sofia|Map::Tube::Sofia>
+=item * L<Sofia|Map::Tube::Sofia>
 
-=item L<Tbilisi|Map::Tube::Tbilisi>
+=item * L<Tbilisi|Map::Tube::Tbilisi>
 
-=item L<Tokyo|Map::Tube::Tokyo>
+=item * L<Tokyo|Map::Tube::Tokyo>
 
-=item L<Vienna|Map::Tube::Vienna>
+=item * L<Vienna|Map::Tube::Vienna>
 
-=item L<Warsaw|Map::Tube::Warsaw>
+=item * L<Warsaw|Map::Tube::Warsaw>
 
-=item L<Yekaterinburg|Map::Tube::Yekaterinburg>
+=item * L<Yekaterinburg|Map::Tube::Yekaterinburg>
 
 =back
 
@@ -160,6 +159,14 @@ sub BUILD {
 
 =head2 run()
 
+The only method provided  by the package L<Map::Tube::CLI>. It doesn't expect any
+parameter. Below is the sample code from the supplied 'map-tube.pl' script.
+
+    use strict; use warnings;
+    use Map::Tube::CLI;
+
+    Map::Tube::CLI->new_with_options->run;
+
 =cut
 
 sub run {
@@ -169,7 +176,7 @@ sub run {
     my $end   = $self->end;
     my $map   = $self->map;
     if (exists $self->{maps}->{uc($map)}) {
-        print $self->{maps}->{uc($map)}->get_shortest_route($start, $end);
+        print $self->{maps}->{uc($map)}->get_shortest_route($start, $end), "\n";
     }
     else {
         die "ERROR: Map [$map] not installed.\n";
