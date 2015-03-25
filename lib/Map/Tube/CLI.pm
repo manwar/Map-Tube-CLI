@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION = '0.02';
+$Map::Tube::CLI::VERSION = '0.03';
 
 =head1 NAME
 
@@ -8,7 +8,7 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =cut
 
@@ -26,10 +26,11 @@ use namespace::clean;
 use Types::Standard -all;
 use MooX::Options;
 
-has maps     => (is => 'rw');
-option map   => (is => 'ro', isa => Str, format => 's', required => 1, doc => 'Map name'          );
-option start => (is => 'ro', isa => Str, format => 's', required => 1, doc => 'Start station name');
-option end   => (is => 'ro', isa => Str, format => 's', required => 1, doc => 'End station name'  );
+has maps         => (is => 'rw');
+option map       => (is => 'ro', isa => Str, format => 's', required => 1, doc => 'Map name'          );
+option start     => (is => 'ro', isa => Str, format => 's', required => 1, doc => 'Start station name');
+option end       => (is => 'ro', isa => Str, format => 's', required => 1, doc => 'End station name'  );
+option preferred => (is => 'ro', doc => 'Show preferred route');
 
 =head1 DESCRIPTION
 
@@ -50,6 +51,9 @@ You can list all command line options by giving --help flag.
     --map: String
         Map name
 
+    --preferred:
+        Show preferred route
+
     --start: String
         Start station name
 
@@ -62,16 +66,22 @@ You can list all command line options by giving --help flag.
     --man:
         show the manual
 
-You can also ask for shortest route in London Tube Map as below
+You can also ask for shortest route in London Tube Map as below:
 
-    $ map-tube.pl --map 'London' --start 'Baker Street' --end 'Wembley Park'
+    $ map-tube.pl --map 'London' --start 'Baker Street' --end 'Euston Square'
 
-    Baker Street (Circle, Hammersmith & City, Bakerloo, Metropolitan, Jubilee), Finchley Road (Metropolitan, Jubilee), Wembley Park (Metropolitan, Jubilee)
+    Baker Street (Circle, Hammersmith & City, Bakerloo, Metropolitan, Jubilee), Great Portland Street (Circle, Hammersmith & City, Metropolitan), Euston Square (Circle, Hammersmith & City, Metropolitan)
+
+Now request for preferred route as below:
+
+    $ map-tube.pl --map 'London' --start 'Baker Street' --end 'Euston Square' --preferred
+
+    Baker Street (Circle), Great Portland Street (Circle), Euston Square (Circle)
 
 If encountered  invalid  map  or  missing map i.e not installed, you get an error
 message like below:
 
-    $ map-tube.pl --map 'xYz' --start 'Baker Street' --end 'Wembley Park'
+    $ map-tube.pl --map 'xYz' --start 'Baker Street' --end 'Euston Square'
     ERROR: Map [xYz] not installed.
 
 =head1 SUPPORTED MAPS
@@ -160,7 +170,7 @@ sub BUILD {
 =head2 run()
 
 The only method provided  by the package L<Map::Tube::CLI>. It doesn't expect any
-parameter. Below is the sample code from the supplied 'map-tube.pl' script.
+parameter. Here is the code from the supplied C<map-tube.pl> script.
 
     use strict; use warnings;
     use Map::Tube::CLI;
@@ -176,7 +186,12 @@ sub run {
     my $end   = $self->end;
     my $map   = $self->map;
     if (exists $self->{maps}->{uc($map)}) {
-        print $self->{maps}->{uc($map)}->get_shortest_route($start, $end), "\n";
+        if ($self->preferred) {
+            print $self->{maps}->{uc($map)}->get_shortest_route($start, $end)->preferred, "\n";
+        }
+        else {
+            print $self->{maps}->{uc($map)}->get_shortest_route($start, $end), "\n";
+        }
     }
     else {
         die "ERROR: Map [$map] not installed.\n";

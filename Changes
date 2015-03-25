@@ -1,5 +1,8 @@
 Revision history for Map::Tube::CLI
 
+0.03  Wed Mar 25 22:35:00 2015
+      - Proposed solution for issue RT: #103105 subject to feedbacks.
+
 0.02  Tue Mar 24 12:15:00 2015
       - Documented method run().
       - Tweaked slightly method run() to return the result with "\n" at the end.
