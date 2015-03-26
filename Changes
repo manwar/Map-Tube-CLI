@@ -1,5 +1,8 @@
 Revision history for Map::Tube::CLI
 
+0.05  Thu Mar 26 11:25:00 2015
+      - Updated pod document with regards to the changes to Map::Tube v2.95.
+
 0.04  Thu Mar 26 03:55:00 2015
       - Tidied up pod document.
 

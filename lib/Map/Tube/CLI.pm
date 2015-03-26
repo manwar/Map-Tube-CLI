@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION = '0.04';
+$Map::Tube::CLI::VERSION = '0.05';
 
 =head1 NAME
 
@@ -8,7 +8,7 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.04
+Version 0.05
 
 =cut
 
@@ -76,7 +76,7 @@ Now request for preferred route as below:
 
     $ map-tube.pl --map 'London' --start 'Baker Street' --end 'Euston Square' --preferred
 
-    Baker Street (Circle), Great Portland Street (Circle), Euston Square (Circle)
+    Baker Street (Circle, Hammersmith & City, Metropolitan), Great Portland Street (Circle, Hammersmith & City, Metropolitan), Euston Square (Circle, Hammersmith & City, Metropolitan)
 
 If encountered  invalid  map  or  missing map i.e not installed, you get an error
 message like below:
