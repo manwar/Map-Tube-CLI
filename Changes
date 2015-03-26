@@ -1,5 +1,8 @@
 Revision history for Map::Tube::CLI
 
+0.04  Thu Mar 26 03:55:00 2015
+      - Tidied up pod document.
+
 0.03  Wed Mar 25 22:35:00 2015
       - Proposed solution for issue RT: #103105 subject to feedbacks.
 

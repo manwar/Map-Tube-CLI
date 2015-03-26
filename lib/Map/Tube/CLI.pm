@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION = '0.03';
+$Map::Tube::CLI::VERSION = '0.04';
 
 =head1 NAME
 
@@ -8,7 +8,7 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.03
+Version 0.04
 
 =cut
 
@@ -35,8 +35,8 @@ option preferred => (is => 'ro', doc => 'Show preferred route');
 =head1 DESCRIPTION
 
 It provides simple command line interface  to the package consuming L<Map::Tube>.
-On install, it copies a  very light weight script built around L<Map::Tube::CLI>
-called 'map-tube.pl'.
+The  distribution contains a script C<map-tube.pl>, which  implements the package
+L<Map::Tube::CLI>.
 
 =head1 SYNOPSIS
 
@@ -169,8 +169,8 @@ sub BUILD {
 
 =head2 run()
 
-The only method provided  by the package L<Map::Tube::CLI>. It doesn't expect any
-parameter. Here is the code from the supplied C<map-tube.pl> script.
+This is the only method provided by the package L<Map::Tube::CLI>. It does not
+expect any parameter. Here is the code from the supplied C<map-tube.pl> script.
 
     use strict; use warnings;
     use Map::Tube::CLI;
