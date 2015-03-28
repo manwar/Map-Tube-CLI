@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION = '0.05';
+$Map::Tube::CLI::VERSION = '0.06';
 
 =head1 NAME
 
@@ -8,7 +8,7 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.05
+Version 0.06
 
 =cut
 
@@ -35,15 +35,14 @@ option preferred => (is => 'ro', doc => 'Show preferred route');
 =head1 DESCRIPTION
 
 It provides simple command line interface  to the package consuming L<Map::Tube>.
-The  distribution contains a script C<map-tube.pl>, which  implements the package
-L<Map::Tube::CLI>.
+The distribution contains a script C<map-tube>, using package L<Map::Tube::CLI>.
 
 =head1 SYNOPSIS
 
 You can list all command line options by giving --help flag.
 
-    $ map-tube.pl --help
-    USAGE: map-tube.pl [-h] [long options...]
+    $ map-tube --help
+    USAGE: map-tube [-h] [long options...]
 
     --end: String
         End station name
@@ -68,20 +67,20 @@ You can list all command line options by giving --help flag.
 
 You can also ask for shortest route in London Tube Map as below:
 
-    $ map-tube.pl --map 'London' --start 'Baker Street' --end 'Euston Square'
+    $ map-tube --map 'London' --start 'Baker Street' --end 'Euston Square'
 
     Baker Street (Circle, Hammersmith & City, Bakerloo, Metropolitan, Jubilee), Great Portland Street (Circle, Hammersmith & City, Metropolitan), Euston Square (Circle, Hammersmith & City, Metropolitan)
 
 Now request for preferred route as below:
 
-    $ map-tube.pl --map 'London' --start 'Baker Street' --end 'Euston Square' --preferred
+    $ map-tube --map 'London' --start 'Baker Street' --end 'Euston Square' --preferred
 
     Baker Street (Circle, Hammersmith & City, Metropolitan), Great Portland Street (Circle, Hammersmith & City, Metropolitan), Euston Square (Circle, Hammersmith & City, Metropolitan)
 
 If encountered  invalid  map  or  missing map i.e not installed, you get an error
 message like below:
 
-    $ map-tube.pl --map 'xYz' --start 'Baker Street' --end 'Euston Square'
+    $ map-tube --map 'xYz' --start 'Baker Street' --end 'Euston Square'
     ERROR: Map [xYz] not installed.
 
 =head1 SUPPORTED MAPS
@@ -170,7 +169,7 @@ sub BUILD {
 =head2 run()
 
 This is the only method provided by the package L<Map::Tube::CLI>. It does not
-expect any parameter. Here is the code from the supplied C<map-tube.pl> script.
+expect any parameter. Here is the code from the supplied C<map-tube> script.
 
     use strict; use warnings;
     use Map::Tube::CLI;

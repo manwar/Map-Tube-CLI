@@ -1,5 +1,9 @@
 Revision history for Map::Tube::CLI
 
+0.06  Sat Mar 28 08:50:00 2015
+      - Renamed the supplied script to 'map-tube'.
+      - Updated pod document accordingly in the package Map::Tube::CLI.
+
 0.05  Thu Mar 26 11:25:00 2015
       - Updated pod document with regards to the changes to Map::Tube v2.95.
 

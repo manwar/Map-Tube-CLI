@@ -11,7 +11,7 @@ WriteMakefile(
     VERSION_FROM       => 'lib/Map/Tube/CLI.pm',
     ABSTRACT_FROM      => 'lib/Map/Tube/CLI.pm',
     LICENSE            => 'artistic_2',
-    EXE_FILES          => [ 'script/map-tube.pl' ],
+    EXE_FILES          => [ 'script/map-tube' ],
     PL_FILES           => {},
     MIN_PERL_VERSION   => 5.006,
     CONFIGURE_REQUIRES => {

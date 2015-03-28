@@ -8,4 +8,4 @@ README
 t/00-load.t
 t/manifest.t
 t/pod.t
-script/map-tube.pl
+script/map-tube
