@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION = '0.06';
+$Map::Tube::CLI::VERSION = '0.07';
 
 =head1 NAME
 
@@ -8,7 +8,7 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.06
+Version 0.07
 
 =cut
 
@@ -81,7 +81,10 @@ If encountered  invalid  map  or  missing map i.e not installed, you get an erro
 message like below:
 
     $ map-tube --map 'xYz' --start 'Baker Street' --end 'Euston Square'
-    ERROR: Map [xYz] not installed.
+    ERROR: Unsupported map [xYz] received.
+
+    $ map-tube --map 'Kazan' --start 'Baker Street' --end 'Euston Square'
+    ERROR: Map [Kazan] is not installed.
 
 =head1 SUPPORTED MAPS
 
@@ -184,6 +187,10 @@ sub run {
     my $start = $self->start;
     my $end   = $self->end;
     my $map   = $self->map;
+
+    my $supported_maps = _supported_maps();
+    die "ERROR: Unsupported map [$map] received.\n" unless (exists $supported_maps->{uc($map)});
+
     if (exists $self->{maps}->{uc($map)}) {
         if ($self->preferred) {
             print $self->{maps}->{uc($map)}->get_shortest_route($start, $end)->preferred, "\n";
@@ -193,7 +200,7 @@ sub run {
         }
     }
     else {
-        die "ERROR: Map [$map] not installed.\n";
+        die "ERROR: Map [$map] is not installed.\n";
     }
 }
 
@@ -206,9 +213,8 @@ sub _map_key {
     return unless defined $name;
 
     my $maps = _supported_maps();
-    foreach (@$maps) {
-        /^Map\:\:Tube\:\:(.*)$/;
-        return $1 if (uc($_) eq uc($name));
+    foreach my $map (keys %$maps) {
+        return $map if ($maps->{$map} eq $name);
     }
 
     return;
@@ -216,37 +222,37 @@ sub _map_key {
 
 sub _supported_maps {
 
-    return [
-        'Map::Tube::Barcelona',
-        'Map::Tube::Beijing',
-        'Map::Tube::Berlin',
-        'Map::Tube::Bucharest',
-        'Map::Tube::Budapest',
-        'Map::Tube::Delhi',
-        'Map::Tube::Dnipropetrovsk',
-        'Map::Tube::Glasgow',
-        'Map::Tube::Kazan',
-        'Map::Tube::Kharkiv',
-        'Map::Tube::Kiev',
-        'Map::Tube::KoelnBonn',
-        'Map::Tube::London',
-        'Map::Tube::Lyon',
-        'Map::Tube::Minsk',
-        'Map::Tube::Moscow',
-        'Map::Tube::NYC',
-        'Map::Tube::Nanjing',
-        'Map::Tube::Novosibirsk',
-        'Map::Tube::Prague',
-        'Map::Tube::SaintPetersburg',
-        'Map::Tube::Samara',
-        'Map::Tube::Singapore',
-        'Map::Tube::Sofia',
-        'Map::Tube::Tbilisi',
-        'Map::Tube::Tokyo',
-        'Map::Tube::Vienna',
-        'Map::Tube::Warsaw',
-        'Map::Tube::Yekaterinburg',
-    ];
+    return {
+        'BARCELONA'       => 'Map::Tube::Barcelona',
+        'BEIJING'         => 'Map::Tube::Beijing',
+        'BERLIN'          => 'Map::Tube::Berlin',
+        'BUCHAREST'       => 'Map::Tube::Bucharest',
+        'BUDAPEST'        => 'Map::Tube::Budapest',
+        'DELHI'           => 'Map::Tube::Delhi',
+        'DNIPROPETROVSK'  => 'Map::Tube::Dnipropetrovsk',
+        'GLASGOW'         => 'Map::Tube::Glasgow',
+        'KAZAN'           => 'Map::Tube::Kazan',
+        'KHARKIV'         => 'Map::Tube::Kharkiv',
+        'KIEV'            => 'Map::Tube::Kiev',
+        'KOELNBONN'       => 'Map::Tube::KoelnBonn',
+        'LONDON'          => 'Map::Tube::London',
+        'LYON'            => 'Map::Tube::Lyon',
+        'MINSK'           => 'Map::Tube::Minsk',
+        'MOSCOW'          => 'Map::Tube::Moscow',
+        'NYC'             => 'Map::Tube::NYC',
+        'NANJING'         => 'Map::Tube::Nanjing',
+        'NOVOSIBIRSK'     => 'Map::Tube::Novosibirsk',
+        'PRAGUE'          => 'Map::Tube::Prague',
+        'SAINTPETERSBURG' => 'Map::Tube::SaintPetersburg',
+        'SAMARA'          => 'Map::Tube::Samara',
+        'SINGAPORE'       => 'Map::Tube::Singapore',
+        'SOFIA'           => 'Map::Tube::Sofia',
+        'TBILISI'         => 'Map::Tube::Tbilisi',
+        'TOKYO'           => 'Map::Tube::Tokyo',
+        'VIENNA'          => 'Map::Tube::Vienna',
+        'WARSAW'          => 'Map::Tube::Warsaw',
+        'YEKATERINBURG'   => 'Map::Tube::Yekaterinburg',
+    };
 }
 
 =head1 AUTHOR
