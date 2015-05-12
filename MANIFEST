@@ -1,11 +1,13 @@
 Changes
 lib/Map/Tube/CLI.pm
+lib/Map/Tube/CLI/Option.pm
 Makefile.PL
 LICENSE
 MANIFEST
 MANIFEST.SKIP
 README
 t/00-load.t
+t/01-map-tube-cli.t
 t/manifest.t
 t/pod.t
 script/map-tube

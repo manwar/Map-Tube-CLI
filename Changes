@@ -1,5 +1,10 @@
 Revision history for Map::Tube::CLI
 
+0.08  Tue May 12 10:30:00 2015
+      - Extracted out options and added as Moo Role (Map::Tube::CLI::Option) to make it easier to test.
+      - Added unit test 01-map-tube-cli.t script.
+      - Added Capure::Tiny v0.28 as build require in the Makefile.PL script.
+
 0.07  Sun Apr 05 02:55:00 2015
       - Improved error handling.
 

@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION = '0.07';
+$Map::Tube::CLI::VERSION = '0.08';
 
 =head1 NAME
 
@@ -8,12 +8,13 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.07
+Version 0.08
 
 =cut
 
 use 5.006;
 use Data::Dumper;
+use Map::Tube::CLI::Option;
 use Module::Pluggable
     search_path => [ 'Map::Tube' ],
     require     => 1,
@@ -22,15 +23,8 @@ use Module::Pluggable
 
 use Moo;
 use namespace::clean;
-
-use Types::Standard -all;
 use MooX::Options;
-
-has maps         => (is => 'rw');
-option map       => (is => 'ro', isa => Str, format => 's', required => 1, doc => 'Map name'          );
-option start     => (is => 'ro', isa => Str, format => 's', required => 1, doc => 'Start station name');
-option end       => (is => 'ro', isa => Str, format => 's', required => 1, doc => 'End station name'  );
-option preferred => (is => 'ro', doc => 'Show preferred route');
+with 'Map::Tube::CLI::Option';
 
 =head1 DESCRIPTION
 
