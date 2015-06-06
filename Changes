@@ -1,5 +1,9 @@
 Revision history for Map::Tube::CLI
 
+0.09  Sun Jun 07 00:30:00 2015
+      - Validated parameter in the method BUILD() and not in the method run().
+      - Added unit test for command line parameters.
+
 0.08  Tue May 12 10:30:00 2015
       - Extracted out options and added as Moo Role (Map::Tube::CLI::Option) to make it easier to test.
       - Added unit test 01-map-tube-cli.t script.

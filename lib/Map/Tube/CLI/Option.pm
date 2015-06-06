@@ -1,6 +1,6 @@
 package Map::Tube::CLI::Option;
 
-$Map::Tube::CLI::Option::VERSION = '0.08';
+$Map::Tube::CLI::Option::VERSION = '0.09';
 
 =head1 NAME
 
@@ -8,7 +8,7 @@ Map::Tube::CLI::Option - Option as Moo Role for Map::Tube::CLI.
 
 =head1 VERSION
 
-Version 0.08
+Version 0.09
 
 =cut
 

@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION = '0.08';
+$Map::Tube::CLI::VERSION = '0.09';
 
 =head1 NAME
 
@@ -8,7 +8,7 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.08
+Version 0.09
 
 =cut
 
@@ -159,6 +159,8 @@ sub BUILD {
             $self->{maps}->{uc($key)} = $plugin->new;
         }
     }
+
+    $self->_validate_param;
 }
 
 =head1 METHODS
@@ -182,19 +184,11 @@ sub run {
     my $end   = $self->end;
     my $map   = $self->map;
 
-    my $supported_maps = _supported_maps();
-    die "ERROR: Unsupported map [$map] received.\n" unless (exists $supported_maps->{uc($map)});
-
-    if (exists $self->{maps}->{uc($map)}) {
-        if ($self->preferred) {
-            print $self->{maps}->{uc($map)}->get_shortest_route($start, $end)->preferred, "\n";
-        }
-        else {
-            print $self->{maps}->{uc($map)}->get_shortest_route($start, $end), "\n";
-        }
+    if ($self->preferred) {
+        print $self->{maps}->{uc($map)}->get_shortest_route($start, $end)->preferred, "\n";
     }
     else {
-        die "ERROR: Map [$map] is not installed.\n";
+        print $self->{maps}->{uc($map)}->get_shortest_route($start, $end), "\n";
     }
 }
 
@@ -212,6 +206,20 @@ sub _map_key {
     }
 
     return;
+}
+
+sub _validate_param {
+    my ($self) = @_;
+
+    my $start = $self->start;
+    my $end   = $self->end;
+    my $map   = $self->map;
+
+    my $supported_maps = _supported_maps();
+    die "ERROR: Unsupported map [$map] received.\n" unless (exists $supported_maps->{uc($map)});
+    die "ERROR: Map [$map] is not installed.\n"     unless (exists $self->{maps}->{uc($map)});
+    die "ERROR: Invalid start station [$start].\n"  unless (defined $self->{maps}->{uc($map)}->get_node_by_name($start));
+    die "ERROR: Invalid end station [$end].\n"      unless (defined $self->{maps}->{uc($map)}->get_node_by_name($end));
 }
 
 sub _supported_maps {
