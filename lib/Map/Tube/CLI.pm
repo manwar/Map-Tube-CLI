@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION = '0.09';
+$Map::Tube::CLI::VERSION = '0.10';
 
 =head1 NAME
 
@@ -8,7 +8,7 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.09
+Version 0.10
 
 =cut
 
@@ -110,6 +110,8 @@ case insensitive i.e. 'London' and 'lOndOn' are the same.
 =item * L<Kiev|Map::Tube::Kiev>
 
 =item * L<KoelnBonn|Map::Tube::KoelnBonn>
+
+=item * L<KualaLumpur|Map::Tube::KualaLumpur>
 
 =item * L<London|Map::Tube::London>
 
@@ -237,6 +239,7 @@ sub _supported_maps {
         'KHARKIV'         => 'Map::Tube::Kharkiv',
         'KIEV'            => 'Map::Tube::Kiev',
         'KOELNBONN'       => 'Map::Tube::KoelnBonn',
+        'KUALALUMPUR'     => 'Map::Tube::KualaLumpur',
         'LONDON'          => 'Map::Tube::London',
         'LYON'            => 'Map::Tube::Lyon',
         'MINSK'           => 'Map::Tube::Minsk',

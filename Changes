@@ -1,5 +1,8 @@
 Revision history for Map::Tube::CLI
 
+0.10  Fri Aug 14 11:00:00 2015
+      - Added support for KualaLumpur map.
+
 0.09  Sun Jun 07 00:30:00 2015
       - Validated parameter in the method BUILD() and not in the method run().
       - Added unit test for command line parameters.

@@ -17,16 +17,16 @@ WriteMakefile(
     CONFIGURE_REQUIRES => {
         'ExtUtils::MakeMaker' => 0,
     },
-    BUILD_REQUIRES   => {
+    BUILD_REQUIRES      => {
         'Test::More'    => 0,
         'Capture::Tiny' => '0.28',
     },
     PREREQ_PM               => {
-        'Types::Standard'   => 0,
-        'MooX::Options'     => 0,
-        'Module::Pluggable' => 0,
-        'Moo'               => 0,
-        'namespace::clean'  => 0,
+        'Types::Standard'   => '1.000005',
+        'MooX::Options'     => '4.018',
+        'Module::Pluggable' => '5.1',
+        'Moo'               => '2.000000',
+        'namespace::clean'  => '0.24',
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'Map-Tube-CLI-*' },
