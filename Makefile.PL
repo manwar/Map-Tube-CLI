@@ -27,6 +27,7 @@ WriteMakefile(
         'Module::Pluggable' => '5.1',
         'Moo'               => '2.000000',
         'namespace::clean'  => '0.24',
+        'MIME::Base64'      => '3.14'
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'Map-Tube-CLI-*' },

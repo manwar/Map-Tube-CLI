@@ -6,7 +6,7 @@ use Capture::Tiny ':all';
 use Map::Tube::CLI;
 use Test::More;
 
-my $min_tcm = 0.72;
+my $min_tcm = 0.73;
 eval "use Map::Tube::London $min_tcm";
 plan skip_all => "Map::Tube::London $min_tcm required" if $@;
 
@@ -14,18 +14,9 @@ is(capture_stdout { Map::Tube::CLI->new({ map => 'London', start => 'Baker Stree
    "Baker Street (Circle, Hammersmith & City, Bakerloo, Metropolitan, Jubilee), Great Portland Street (Circle, Hammersmith & City, Metropolitan), Euston Square (Circle, Hammersmith & City, Metropolitan)\n");
 
 eval { Map::Tube::CLI->new };
-like($@, qr/Missing required arguments: end, map, start/);
+like($@, qr/Missing required arguments: map/);
 
 eval { Map::Tube::CLI->new({ map => 'X' }) };
-like($@, qr/Missing required arguments: end, start/);
-
-eval { Map::Tube::CLI->new({ map => 'X', start => 'Y' }) };
-like($@, qr/Missing required arguments: end/);
-
-eval { Map::Tube::CLI->new({ map => 'X', end => 'Y' }) };
-like($@, qr/Missing required arguments: start/);
-
-eval { Map::Tube::CLI->new({ map => 'X', start => 'Y', end => 'Z' }) };
 like($@, qr/ERROR: Unsupported map/);
 
 eval { Map::Tube::CLI->new({ map => 'London', start => 'Y', end => 'Z' }) };
@@ -33,5 +24,23 @@ like($@, qr/ERROR: Invalid start station/);
 
 eval { Map::Tube::CLI->new({ map => 'London', start => 'Baker Street', end => 'Z' }) };
 like($@, qr/ERROR: Invalid end station/);
+
+eval { Map::Tube::CLI->new({ map => 'London', preferred => 1 }) };
+like($@, qr/ERROR: Missing start station/);
+
+eval { Map::Tube::CLI->new({ map => 'London', preferred => 1, start => 'Y' }) };
+like($@, qr/ERROR: Missing end station/);
+
+eval { Map::Tube::CLI->new({ map => 'London', preferred => 1, start => 'Y', end => 'Z' }) };
+like($@, qr/ERROR: Invalid start station/);
+
+eval { Map::Tube::CLI->new({ map => 'London', preferred => 1, start => 'Baker Street', end => 'Z' }) };
+like($@, qr/ERROR: Invalid end station/);
+
+eval { Map::Tube::CLI->new({ map => 'London', generate_map => 1 }) };
+like($@, qr/ERROR: Missing Line name to generate the map/);
+
+eval { Map::Tube::CLI->new({ map => 'London', generate_map => 1, line => 'X' }) };
+like($@, qr/ERROR: Invalid Line name/);
 
 done_testing();

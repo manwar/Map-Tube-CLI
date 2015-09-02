@@ -1,6 +1,6 @@
 package Map::Tube::CLI::Option;
 
-$Map::Tube::CLI::Option::VERSION = '0.10';
+$Map::Tube::CLI::Option::VERSION = '0.11';
 
 =head1 NAME
 
@@ -8,7 +8,7 @@ Map::Tube::CLI::Option - Option as Moo Role for Map::Tube::CLI.
 
 =head1 VERSION
 
-Version 0.10
+Version 0.11
 
 =cut
 
@@ -21,11 +21,13 @@ use namespace::clean;
 use Types::Standard -all;
 use MooX::Options;
 
-has maps         => (is => 'rw');
-option map       => (is => 'ro', isa => Str, format => 's', required => 1, doc => 'Map name'          );
-option start     => (is => 'ro', isa => Str, format => 's', required => 1, doc => 'Start station name');
-option end       => (is => 'ro', isa => Str, format => 's', required => 1, doc => 'End station name'  );
-option preferred => (is => 'ro', doc => 'Show preferred route');
+has maps            => (is => 'rw');
+option map          => (is => 'ro', isa => Str, format => 's', required => 1, doc => 'Map name'          );
+option start        => (is => 'ro', isa => Str, format => 's', doc => 'Start station name');
+option end          => (is => 'ro', isa => Str, format => 's', doc => 'End station name'  );
+option line         => (is => 'ro', isa => Str, format => 's', doc => 'Line name' );
+option generate_map => (is => 'ro', doc => 'Generate map as image');
+option preferred    => (is => 'ro', doc => 'Show preferred route');
 
 =head1 DESCRIPTION
 

@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION = '0.10';
+$Map::Tube::CLI::VERSION = '0.11';
 
 =head1 NAME
 
@@ -8,12 +8,13 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.10
+Version 0.11
 
 =cut
 
 use 5.006;
 use Data::Dumper;
+use MIME::Base64;
 use Map::Tube::CLI::Option;
 use Module::Pluggable
     search_path => [ 'Map::Tube' ],
@@ -40,6 +41,12 @@ You can list all command line options by giving --help flag.
 
     --end: String
         End station name
+
+    --generate_map:
+        Generate map as image
+
+    --line: String
+        Line name
 
     --map: String
         Map name
@@ -185,9 +192,17 @@ sub run {
     my $start = $self->start;
     my $end   = $self->end;
     my $map   = $self->map;
+    my $line  = $self->line;
 
     if ($self->preferred) {
         print $self->{maps}->{uc($map)}->get_shortest_route($start, $end)->preferred, "\n";
+    }
+    elsif ($self->generate_map) {
+        my $obj = $self->{maps}->{uc($map)}->get_line_by_name($line);
+        open(my $IMAGE, ">$line.png");
+        binmode($IMAGE);
+        print $IMAGE decode_base64($self->{maps}->{uc($map)}->as_image($line));
+        close($IMAGE);
     }
     else {
         print $self->{maps}->{uc($map)}->get_shortest_route($start, $end), "\n";
@@ -216,12 +231,24 @@ sub _validate_param {
     my $start = $self->start;
     my $end   = $self->end;
     my $map   = $self->map;
+    my $line  = $self->line;
 
     my $supported_maps = _supported_maps();
     die "ERROR: Unsupported map [$map] received.\n" unless (exists $supported_maps->{uc($map)});
     die "ERROR: Map [$map] is not installed.\n"     unless (exists $self->{maps}->{uc($map)});
-    die "ERROR: Invalid start station [$start].\n"  unless (defined $self->{maps}->{uc($map)}->get_node_by_name($start));
-    die "ERROR: Invalid end station [$end].\n"      unless (defined $self->{maps}->{uc($map)}->get_node_by_name($end));
+
+    if ($self->generate_map) {
+        die "ERROR: Missing Line name to generate the map.\n" unless defined $line;
+        die "ERROR: Invalid Line name [$line].\n"             unless defined $self->{maps}->{uc($map)}->get_line_by_name($line);
+    }
+
+    unless ($self->generate_map) {
+        die "ERROR: Missing start station.\n" unless defined $start;
+        die "ERROR: Missing end station.\n"   unless defined $end;
+
+        die "ERROR: Invalid start station [$start].\n" unless defined $self->{maps}->{uc($map)}->get_node_by_name($start);
+        die "ERROR: Invalid end station [$end].\n"     unless defined $self->{maps}->{uc($map)}->get_node_by_name($end);
+    }
 }
 
 sub _supported_maps {

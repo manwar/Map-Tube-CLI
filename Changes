@@ -1,5 +1,8 @@
 Revision history for Map::Tube::CLI
 
+0.11  Wed Sep 02 09:42:00 2015
+      - Added support to generate line map as png image.
+
 0.10  Fri Aug 14 11:00:00 2015
       - Added support for KualaLumpur map.
 
