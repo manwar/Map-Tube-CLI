@@ -1,5 +1,8 @@
 Revision history for Map::Tube::CLI
 
+0.12  Sat Sep 12 16:25:00 2015
+      - Added support for Malaga map.
+
 0.11  Wed Sep 02 09:42:00 2015
       - Added support to generate line map as png image.
 

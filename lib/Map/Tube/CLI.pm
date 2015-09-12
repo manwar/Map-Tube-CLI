@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION = '0.11';
+$Map::Tube::CLI::VERSION = '0.12';
 
 =head1 NAME
 
@@ -8,7 +8,7 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.11
+Version 0.12
 
 =cut
 
@@ -39,23 +39,23 @@ You can list all command line options by giving --help flag.
     $ map-tube --help
     USAGE: map-tube [-h] [long options...]
 
+    --map: String
+        Map name
+
+    --start: String
+        Start station name
+
     --end: String
         End station name
+
+    --preferred:
+        Show preferred route
 
     --generate_map:
         Generate map as image
 
     --line: String
         Line name
-
-    --map: String
-        Map name
-
-    --preferred:
-        Show preferred route
-
-    --start: String
-        Start station name
 
     --usage:
         show a short help message
@@ -123,6 +123,8 @@ case insensitive i.e. 'London' and 'lOndOn' are the same.
 =item * L<London|Map::Tube::London>
 
 =item * L<Lyon|Map::Tube::Lyon>
+
+=item * L<Malaga|Map::Tube::Malaga>
 
 =item * L<Minsk|Map::Tube::Minsk>
 
@@ -269,6 +271,7 @@ sub _supported_maps {
         'KUALALUMPUR'     => 'Map::Tube::KualaLumpur',
         'LONDON'          => 'Map::Tube::London',
         'LYON'            => 'Map::Tube::Lyon',
+        'MALAGA'          => 'Map::Tube::Malaga',
         'MINSK'           => 'Map::Tube::Minsk',
         'MOSCOW'          => 'Map::Tube::Moscow',
         'NYC'             => 'Map::Tube::NYC',

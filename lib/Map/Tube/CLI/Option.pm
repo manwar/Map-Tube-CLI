@@ -1,6 +1,6 @@
 package Map::Tube::CLI::Option;
 
-$Map::Tube::CLI::Option::VERSION = '0.11';
+$Map::Tube::CLI::Option::VERSION = '0.12';
 
 =head1 NAME
 
@@ -8,7 +8,7 @@ Map::Tube::CLI::Option - Option as Moo Role for Map::Tube::CLI.
 
 =head1 VERSION
 
-Version 0.11
+Version 0.12
 
 =cut
 
@@ -22,7 +22,7 @@ use Types::Standard -all;
 use MooX::Options;
 
 has maps            => (is => 'rw');
-option map          => (is => 'ro', isa => Str, format => 's', required => 1, doc => 'Map name'          );
+option map          => (is => 'ro', isa => Str, format => 's', required => 1, doc => 'Map name');
 option start        => (is => 'ro', isa => Str, format => 's', doc => 'Start station name');
 option end          => (is => 'ro', isa => Str, format => 's', doc => 'End station name'  );
 option line         => (is => 'ro', isa => Str, format => 's', doc => 'Line name' );
