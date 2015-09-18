@@ -1,5 +1,8 @@
 Revision history for Map::Tube::CLI
 
+0.13  Fri Sep 18 10:40:00 2015
+      - Replaced die() with Map::Tube::Exception::* call.
+
 0.12  Sat Sep 12 16:25:00 2015
       - Added support for Malaga map.
 

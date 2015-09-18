@@ -18,16 +18,17 @@ WriteMakefile(
         'ExtUtils::MakeMaker' => 0,
     },
     BUILD_REQUIRES      => {
-        'Test::More'    => 0,
+        'Test::More'    => '1.001014',
         'Capture::Tiny' => '0.28',
     },
-    PREREQ_PM               => {
-        'Types::Standard'   => '1.000005',
-        'MooX::Options'     => '4.018',
-        'Module::Pluggable' => '5.1',
-        'Moo'               => '2.000000',
-        'namespace::clean'  => '0.24',
-        'MIME::Base64'      => '3.14'
+    PREREQ_PM                  => {
+        'Types::Standard'      => '1.000005',
+        'MooX::Options'        => '4.018',
+        'Module::Pluggable'    => '5.1',
+        'Moo'                  => '2.000000',
+        'namespace::clean'     => '0.24',
+        'MIME::Base64'         => '3.14',
+        'Map::Tube::Exception' => '3.03',
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'Map-Tube-CLI-*' },
