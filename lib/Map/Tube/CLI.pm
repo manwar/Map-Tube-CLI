@@ -1,6 +1,7 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION = '0.13';
+$Map::Tube::CLI::VERSION   = '0.14';
+$Map::Tube::CLI::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
 
@@ -8,7 +9,7 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.13
+Version 0.14
 
 =cut
 
@@ -76,7 +77,7 @@ You can also ask for shortest route in London Tube Map as below:
 
     $ map-tube --map 'London' --start 'Baker Street' --end 'Euston Square'
 
-    Baker Street (Circle, Hammersmith & City, Bakerloo, Metropolitan, Jubilee), Great Portland Street (Circle, Hammersmith & City, Metropolitan), Euston Square (Circle, Hammersmith & City, Metropolitan)
+    Baker Street (Bakerloo, Circle, Hammersmith & City, Jubilee, Metropolitan), Great Portland Street (Circle, Hammersmith & City, Metropolitan), Euston Square (Circle, Hammersmith & City, Metropolitan)
 
 Now request for preferred route as below:
 
@@ -88,10 +89,10 @@ If encountered  invalid  map  or  missing map i.e not installed, you get an erro
 message like below:
 
     $ map-tube --map 'xYz' --start 'Baker Street' --end 'Euston Square'
-    ERROR: Unsupported map [xYz] received.
+    ERROR: Unsupported Map [xYz].
 
     $ map-tube --map 'Kazan' --start 'Baker Street' --end 'Euston Square'
-    ERROR: Map [Kazan] is not installed.
+    ERROR: Missing Map [Kazan].
 
 =head1 SUPPORTED MAPS
 
@@ -247,14 +248,14 @@ sub _validate_param {
     my $supported_maps = _supported_maps();
     Map::Tube::Exception::FoundUnsupportedMap->throw({
         method      => __PACKAGE__."::_validate_param",
-        message     => "ERROR: Unsupported map [$map] received.",
+        message     => "ERROR: Unsupported Map [$map].",
         filename    => $caller[1],
         line_number => $caller[2] })
         unless (exists $supported_maps->{uc($map)});
 
     Map::Tube::Exception::MissingSupportedMap->throw({
         method      => __PACKAGE__."::_validate_param",
-        message     => "ERROR: Map [$map] is not installed.",
+        message     => "ERROR: Missing Map [$map].",
         filename    => $caller[1],
         line_number => $caller[2] })
         unless (exists $self->{maps}->{uc($map)});
@@ -262,14 +263,14 @@ sub _validate_param {
     if ($self->generate_map) {
         Map::Tube::Exception::MissingLineName->throw({
             method      => __PACKAGE__."::_validate_param",
-            message     => "ERROR: Missing Line name to generate the map.",
+            message     => "ERROR: Missing Line Name.",
             filename    => $caller[1],
             line_number => $caller[2] })
             unless defined $line;
 
         Map::Tube::Exception::InvalidLineName->throw({
             method      => __PACKAGE__."::_validate_param",
-            message     => "ERROR: Invalid Line name [$line].",
+            message     => "ERROR: Invalid Line Name [$line].",
             filename    => $caller[1],
             line_number => $caller[2] })
             unless defined $self->{maps}->{uc($map)}->get_line_by_name($line);
@@ -278,28 +279,28 @@ sub _validate_param {
     unless ($self->generate_map) {
         Map::Tube::Exception::MissingStationName->throw({
             method      => __PACKAGE__."::_validate_param",
-            message     => "ERROR: Missing start station.",
+            message     => "ERROR: Missing Station Name [start].",
             filename    => $caller[1],
             line_number => $caller[2] })
             unless defined $start;
 
         Map::Tube::Exception::MissingStationName->throw({
             method      => __PACKAGE__."::_validate_param",
-            message     => "ERROR: Missing end station.",
+            message     => "ERROR: Missing Station Name [end].",
             filename    => $caller[1],
             line_number => $caller[2] })
             unless defined $end;
 
         Map::Tube::Exception::InvalidStationName->throw({
             method      => __PACKAGE__."::_validate_param",
-            message     => "ERROR: Invalid start station [$start].",
+            message     => "ERROR: Invalid Station Name [$start].",
             filename    => $caller[1],
             line_number => $caller[2] })
             unless defined $self->{maps}->{uc($map)}->get_node_by_name($start);
 
         Map::Tube::Exception::InvalidStationName->throw({
             method      => __PACKAGE__."::_validate_param",
-            message     => "ERROR: Invalid end station [$start].",
+            message     => "ERROR: Invalid Station Name [$end].",
             filename    => $caller[1],
             line_number => $caller[2] })
             unless defined $self->{maps}->{uc($map)}->get_node_by_name($end);

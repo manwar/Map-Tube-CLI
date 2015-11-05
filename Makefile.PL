@@ -28,7 +28,7 @@ WriteMakefile(
         'Moo'                  => '2.000000',
         'namespace::clean'     => '0.24',
         'MIME::Base64'         => '3.14',
-        'Map::Tube::Exception' => '3.03',
+        'Map::Tube::Exception' => '3.06',
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'Map-Tube-CLI-*' },

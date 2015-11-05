@@ -1,5 +1,13 @@
 Revision history for Map::Tube::CLI
 
+0.14  Thu Nov 05 11:00:00 2015
+      - Fixed the error reported by CPANT Testers.
+      - Upgraded to use Map::Tube::Exception v3.06.
+      - Updated unit test with regard to the change in Map::Tube::Exception error message.
+      - Fixed a buggy unit test.
+      - Updated pod document with regard to the exception error message and exected result.
+      - Added $AUTHORITY to the pod document.
+
 0.13  Fri Sep 18 10:40:00 2015
       - Replaced die() with Map::Tube::Exception::* call.
 
