@@ -1,5 +1,8 @@
 Revision history for Map::Tube::CLI
 
+0.15  Sun Nov 08 11:15:00 2015
+      - Fixed CPANTS inconsistent version error.
+
 0.14  Thu Nov 05 11:00:00 2015
       - Fixed the error reported by CPANT Testers.
       - Upgraded to use Map::Tube::Exception v3.06.
