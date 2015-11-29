@@ -1,5 +1,8 @@
 Revision history for Map::Tube::CLI
 
+0.16  Sun Nov 29 01:45:00 2015
+      - Added key 'provides' to the Makefile.PL script.
+
 0.15  Sun Nov 08 11:15:00 2015
       - Fixed CPANTS inconsistent version error.
 
