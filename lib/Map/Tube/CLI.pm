@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION   = '0.16';
+$Map::Tube::CLI::VERSION   = '0.17';
 $Map::Tube::CLI::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.16
+Version 0.17
 
 =cut
 
@@ -17,7 +17,6 @@ use 5.006;
 use Data::Dumper;
 use MIME::Base64;
 use Map::Tube::Exception::MissingStationName;
-use Map::Tube::Exception::MissingLineName;
 use Map::Tube::Exception::InvalidStationName;
 use Map::Tube::Exception::InvalidLineName;
 use Map::Tube::Exception::MissingSupportedMap;
@@ -93,6 +92,14 @@ message like below:
 
     $ map-tube --map 'Kazan' --start 'Baker Street' --end 'Euston Square'
     ERROR: Missing Map [Kazan].
+
+To generate entire map, follow the command below:
+
+    $ map-tube --map 'Delhi' --generate_map
+
+To generate just a particular line map, follow the command below:
+
+    $ map-tube --map 'London' --line 'Bakerloo' --generate_map
 
 =head1 SUPPORTED MAPS
 
@@ -207,10 +214,19 @@ sub run {
         print $self->{maps}->{uc($map)}->get_shortest_route($start, $end)->preferred, "\n";
     }
     elsif ($self->generate_map) {
-        my $obj = $self->{maps}->{uc($map)}->get_line_by_name($line);
-        open(my $IMAGE, ">$line.png");
+        my ($image_file, $image_data);
+        if (defined $line) {
+            $image_file = sprintf(">%s.png", $line);
+            $image_data = $self->{maps}->{uc($map)}->as_image($line);
+        }
+        else {
+            $image_file = sprintf(">%s.png", $map);
+            $image_data = $self->{maps}->{uc($map)}->as_image;
+        }
+
+        open(my $IMAGE, $image_file);
         binmode($IMAGE);
-        print $IMAGE decode_base64($self->{maps}->{uc($map)}->as_image($line));
+        print $IMAGE decode_base64($image_data);
         close($IMAGE);
     }
     else {
@@ -261,19 +277,14 @@ sub _validate_param {
         unless (exists $self->{maps}->{uc($map)});
 
     if ($self->generate_map) {
-        Map::Tube::Exception::MissingLineName->throw({
-            method      => __PACKAGE__."::_validate_param",
-            message     => "ERROR: Missing Line Name.",
-            filename    => $caller[1],
-            line_number => $caller[2] })
-            unless defined $line;
-
-        Map::Tube::Exception::InvalidLineName->throw({
-            method      => __PACKAGE__."::_validate_param",
-            message     => "ERROR: Invalid Line Name [$line].",
-            filename    => $caller[1],
-            line_number => $caller[2] })
-            unless defined $self->{maps}->{uc($map)}->get_line_by_name($line);
+        if (defined $line) {
+            Map::Tube::Exception::InvalidLineName->throw({
+                method      => __PACKAGE__."::_validate_param",
+                message     => "ERROR: Invalid Line Name [$line].",
+                filename    => $caller[1],
+                line_number => $caller[2] })
+                unless defined $self->{maps}->{uc($map)}->get_line_by_name($line);
+        }
     }
 
     unless ($self->generate_map) {

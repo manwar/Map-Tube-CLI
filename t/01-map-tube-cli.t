@@ -1,4 +1,3 @@
-#!perl -T
 use 5.006;
 use strict;
 use warnings FATAL => 'all';
@@ -36,9 +35,6 @@ like($@, qr/Invalid Station Name/);
 
 eval { Map::Tube::CLI->new({ map => 'London', preferred => 1, start => 'Baker Street', end => 'Z' }) };
 like($@, qr/Invalid Station Name/);
-
-eval { Map::Tube::CLI->new({ map => 'London', generate_map => 1 }) };
-like($@, qr/ERROR: Missing Line Name/);
 
 eval { Map::Tube::CLI->new({ map => 'London', generate_map => 1, line => 'X' }) };
 like($@, qr/Invalid Line Name/);
