@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION   = '0.17';
+$Map::Tube::CLI::VERSION   = '0.18';
 $Map::Tube::CLI::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.17
+Version 0.18
 
 =cut
 
@@ -106,6 +106,9 @@ To generate just a particular line map, follow the command below:
 The command line parameter C<map> can take one of the following map names.  It is
 case insensitive i.e. 'London' and 'lOndOn' are the same.
 
+You could use L<Task::Map::Tube::Metro> to install the supported maps.Please make
+sure you have the latest maps when you install.
+
 =over 4
 
 =item * L<Barcelona|Map::Tube::Barcelona>
@@ -114,7 +117,7 @@ case insensitive i.e. 'London' and 'lOndOn' are the same.
 
 =item * L<Berlin|Map::Tube::Berlin>
 
-=item * L<Buchares|Map::Tube::Bucharest>
+=item * L<Bucharest|Map::Tube::Bucharest>
 
 =item * L<Budapest|Map::Tube::Budapest>
 
@@ -147,6 +150,8 @@ case insensitive i.e. 'London' and 'lOndOn' are the same.
 =item * L<NYC|Map::Tube::NYC>
 
 =item * L<Nanjing|Map::Tube::Nanjing>
+
+=item * L<NizhnyNovgorod|Map::Tube::NizhnyNovgorod>
 
 =item * L<Novosibirsk|Map::Tube::Novosibirsk>
 
@@ -341,6 +346,7 @@ sub _supported_maps {
         'MOSCOW'          => 'Map::Tube::Moscow',
         'NYC'             => 'Map::Tube::NYC',
         'NANJING'         => 'Map::Tube::Nanjing',
+        'NIZHNYNOVGOROD'  => 'Map::Tube::NizhnyNovgorod',
         'NOVOSIBIRSK'     => 'Map::Tube::Novosibirsk',
         'PRAGUE'          => 'Map::Tube::Prague',
         'SAINTPETERSBURG' => 'Map::Tube::SaintPetersburg',
@@ -400,7 +406,7 @@ L<http://search.cpan.org/dist/Map-Tube-CLI/>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright (C) 2015 Mohammad S Anwar.
+Copyright (C) 2015 - 2016 Mohammad S Anwar.
 
 This program  is  free software; you can redistribute it and / or modify it under
 the  terms  of the the Artistic License (2.0). You may obtain  a copy of the full

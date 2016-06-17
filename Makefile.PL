@@ -12,7 +12,6 @@ WriteMakefile(
     ABSTRACT_FROM      => 'lib/Map/Tube/CLI.pm',
     LICENSE            => 'artistic_2',
     EXE_FILES          => [ 'script/map-tube' ],
-    PL_FILES           => {},
     MIN_PERL_VERSION   => 5.006,
     CONFIGURE_REQUIRES => {
         'ExtUtils::MakeMaker' => 0,
@@ -35,8 +34,8 @@ WriteMakefile(
     (eval { ExtUtils::MakeMaker->VERSION(6.46) } ? (META_MERGE => {
         'meta-spec' => { version => 2 },
         provides    => {
-            'Map::Tube::CLI'         => { file => 'lib/Map/Tube/CLI.pm'       , version => '0.17' },
-            'Map::Tube::CLI::Option' => { file => 'lib/Map/Tube/CLI/Option.pm', version => '0.17' },
+            'Map::Tube::CLI'         => { file => 'lib/Map/Tube/CLI.pm'       , version => '0.18' },
+            'Map::Tube::CLI::Option' => { file => 'lib/Map/Tube/CLI/Option.pm', version => '0.18' },
         },
         resources => {
             repository => {

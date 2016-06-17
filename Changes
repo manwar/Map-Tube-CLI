@@ -1,5 +1,9 @@
 Revision history for Map::Tube::CLI
 
+0.18  Fri Jun 17 10:10:00 2016
+      - Added support for map Map::Tube::NizhnyNovgorod.
+      - Updated copyright year information.
+
 0.17  Wed Feb 10 12:30:00 2016
       - Added ability to generate entire map not just one line map.
 
