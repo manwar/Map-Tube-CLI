@@ -10,4 +10,6 @@ t/00-load.t
 t/01-map-tube-cli.t
 t/manifest.t
 t/pod.t
+t/meta-json.t
+t/meta-yml.t
 script/map-tube
