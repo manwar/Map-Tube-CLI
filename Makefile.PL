@@ -27,15 +27,15 @@ WriteMakefile(
         'Moo'                  => '2.000000',
         'namespace::clean'     => '0.24',
         'MIME::Base64'         => '3.14',
-        'Map::Tube::Exception' => '3.06',
+        'Map::Tube::Exception' => '3.08',
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'Map-Tube-CLI-*' },
     (eval { ExtUtils::MakeMaker->VERSION(6.46) } ? (META_MERGE => {
         'meta-spec' => { version => 2 },
         provides    => {
-            'Map::Tube::CLI'         => { file => 'lib/Map/Tube/CLI.pm'       , version => '0.19' },
-            'Map::Tube::CLI::Option' => { file => 'lib/Map/Tube/CLI/Option.pm', version => '0.19' },
+            'Map::Tube::CLI'         => { file => 'lib/Map/Tube/CLI.pm'       , version => '0.20' },
+            'Map::Tube::CLI::Option' => { file => 'lib/Map/Tube/CLI/Option.pm', version => '0.20' },
         },
         resources => {
             repository => {

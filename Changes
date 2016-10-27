@@ -1,5 +1,8 @@
 Revision history for Map::Tube::CLI
 
+0.20  Thu Oct 27 10:30:00 2016
+      - Upgraded to use Map::Tube::Exception v3.08.
+
 0.19  Tue Aug 23 13:20:00 2016
       - Added unit test scripts (t/meta-json.t and t/meta-yml.t).
 

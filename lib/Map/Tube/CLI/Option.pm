@@ -1,6 +1,6 @@
 package Map::Tube::CLI::Option;
 
-$Map::Tube::CLI::Option::VERSION   = '0.19';
+$Map::Tube::CLI::Option::VERSION   = '0.20';
 $Map::Tube::CLI::Option::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Map::Tube::CLI::Option - Option as Moo Role for Map::Tube::CLI.
 
 =head1 VERSION
 
-Version 0.19
+Version 0.20
 
 =cut
 
