@@ -1,5 +1,8 @@
 Revision history for Map::Tube::CLI
 
+0.21  Sun Feb 26 11:00:00 2017
+      - Updated dependency on MooX::Options v4.023, fixing reporting mandatory params.
+
 0.20  Thu Oct 27 10:30:00 2016
       - Upgraded to use Map::Tube::Exception v3.08.
 
