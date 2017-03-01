@@ -1,6 +1,6 @@
 package Map::Tube::CLI::Option;
 
-$Map::Tube::CLI::Option::VERSION   = '0.21';
+$Map::Tube::CLI::Option::VERSION   = '0.22';
 $Map::Tube::CLI::Option::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Map::Tube::CLI::Option - Option as Moo Role for Map::Tube::CLI.
 
 =head1 VERSION
 
-Version 0.21
+Version 0.22
 
 =cut
 
@@ -23,12 +23,12 @@ use Types::Standard -all;
 use MooX::Options;
 
 has maps            => (is => 'rw');
-option map          => (is => 'ro', isa => Str, format => 's', required => 1, doc => 'Map name');
-option start        => (is => 'ro', isa => Str, format => 's', doc => 'Start station name');
-option end          => (is => 'ro', isa => Str, format => 's', doc => 'End station name'  );
-option line         => (is => 'ro', isa => Str, format => 's', doc => 'Line name' );
-option generate_map => (is => 'ro', doc => 'Generate map as image');
-option preferred    => (is => 'ro', doc => 'Show preferred route');
+option map          => (is => 'ro', order => 1, isa => Str, format => 's', required => 1, doc => 'Map name');
+option start        => (is => 'ro', order => 2, isa => Str, format => 's', doc => 'Start station name');
+option end          => (is => 'ro', order => 3, isa => Str, format => 's', doc => 'End station name'  );
+option preferred    => (is => 'ro', order => 4, doc => 'Show preferred route');
+option generate_map => (is => 'ro', order => 5, doc => 'Generate map as image');
+option line         => (is => 'ro', order => 6, isa => Str, format => 's', doc => 'Line name for map' );
 
 =head1 DESCRIPTION
 

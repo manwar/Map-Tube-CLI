@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION   = '0.21';
+$Map::Tube::CLI::VERSION   = '0.22';
 $Map::Tube::CLI::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.21
+Version 0.22
 
 =cut
 
@@ -45,32 +45,17 @@ You can list all command line options by giving --help flag.
     $ map-tube --help
     USAGE: map-tube [-h] [long options...]
 
-    --map: String
-        Map name
+        --map=String    Map name
+        --start=String  Start station name
+        --end=String    End station name
+        --preferred     Show preferred route
+        --generate_map  Generate map as image
+        --line=String   Line name for map
 
-    --start: String
-        Start station name
-
-    --end: String
-        End station name
-
-    --preferred:
-        Show preferred route
-
-    --generate_map:
-        Generate map as image
-
-    --line: String
-        Line name
-
-    --usage:
-        show a short help message
-
-    -h --help:
-        show a help message
-
-    --man:
-        show the manual
+        --usage         show a short help message
+        -h              show a compact help message
+        --help          show a long help message
+        --man           show the manual
 
 You can also ask for shortest route in London Tube Map as below:
 
