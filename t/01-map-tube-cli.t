@@ -5,7 +5,7 @@ use Capture::Tiny ':all';
 use Map::Tube::CLI;
 use Test::More;
 
-my $min_tcm = 0.79;
+my $min_tcm = 0.82;
 eval "use Map::Tube::London $min_tcm";
 plan skip_all => "Map::Tube::London $min_tcm required" if $@;
 

@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION   = '0.23';
+$Map::Tube::CLI::VERSION   = '0.24';
 $Map::Tube::CLI::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.23
+Version 0.24
 
 =cut
 
@@ -40,9 +40,9 @@ The distribution contains a script C<map-tube>, using package L<Map::Tube::CLI>.
 
 =head1 SYNOPSIS
 
-You can list all command line options by giving --help flag.
+You can list all command line options by giving C<-h> flag.
 
-    $ map-tube --help
+    $ map-tube -h
     USAGE: map-tube [-h] [long options...]
 
         --map=String    Map name

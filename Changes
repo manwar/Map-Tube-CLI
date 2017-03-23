@@ -1,5 +1,11 @@
 Revision history for Map::Tube::CLI
 
+0.24  Thu Mar 23 13:55:00 2017
+      - Tidied up test scripts and removed "-T" switch.
+      - Added test for loading package Map::Tube::CLI::Option.
+      - Updated test minimum requirement Map::Tube::London v0.82.
+      - Minor pod changes.
+
 0.23  Sat Mar 04 14:50:00 2017
       - Updated test minimum requirement Map::Tube::London v0.79 as some CPANTESTERs not happy.
 
