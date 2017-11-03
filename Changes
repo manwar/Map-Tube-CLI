@@ -1,5 +1,8 @@
 Revision history for Map::Tube::CLI
 
+0.35  Fri Nov 03 13:13:00 2017
+      - Added missing prereq namespace::autoclean.
+
 0.34  Thu Nov 02 11:30:00 2017
       - [RT #123480] Reverted the shebang changes, thanks @SREZIC.
 
