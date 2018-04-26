@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION   = '0.44';
+$Map::Tube::CLI::VERSION   = '0.45';
 $Map::Tube::CLI::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.44
+Version 0.45
 
 =cut
 
@@ -113,6 +113,8 @@ sure you have the latest maps when you install.
 =item * L<Delhi|Map::Tube::Delhi>
 
 =item * L<Dnipropetrovsk|Map::Tube::Dnipropetrovsk>
+
+=item * L<Frankfurt|Map::Tube::Frankfurt>
 
 =item * L<Glasgow|Map::Tube::Glasgow>
 
@@ -330,6 +332,7 @@ sub _supported_maps {
         'COPENHAGEN'      => 'Map::Tube::Copenhagen',
         'DELHI'           => 'Map::Tube::Delhi',
         'DNIPROPETROVSK'  => 'Map::Tube::Dnipropetrovsk',
+        'FRANKFURT'       => 'Map::Tube::Frankfurt',
         'GLASGOW'         => 'Map::Tube::Glasgow',
         'KAZAN'           => 'Map::Tube::Kazan',
         'KHARKIV'         => 'Map::Tube::Kharkiv',
