@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION   = '0.48';
+$Map::Tube::CLI::VERSION   = '0.49';
 $Map::Tube::CLI::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.48
+Version 0.49
 
 =cut
 
@@ -47,17 +47,23 @@ You can list all command line options by giving C<-h> flag.
     $ map-tube -h
     USAGE: map-tube [-h] [long options...]
 
-        --map=String    Map name
-        --start=String  Start station name
-        --end=String    End station name
-        --preferred     Show preferred route
-        --generate_map  Generate map as image
-        --line=String   Line name for map
+        --map=String     Map name
+        --start=String   Start station name
+        --end=String     End station name
+        --preferred      Show preferred route
+        --generate_map   Generate map as image
+        --line=String    Line name for map
+        --line_mappings  Generate line mappings
+        --line_notes     Generate line notes
 
-        --usage         show a short help message
-        -h              show a compact help message
-        --help          show a long help message
-        --man           show the manual
+        --usage          show a short help message
+        -h               show a compact help message
+        --help           show a long help message
+        --man            show the manual
+
+=head1 COMMON USAGES
+
+=head2 Shortest Route
 
 You can also ask for shortest route in London Tube Map as below:
 
@@ -65,11 +71,35 @@ You can also ask for shortest route in London Tube Map as below:
 
     Baker Street (Bakerloo, Circle, Hammersmith & City, Jubilee, Metropolitan), Great Portland Street (Circle, Hammersmith & City, Metropolitan), Euston Square (Circle, Hammersmith & City, Metropolitan)
 
+=head2 Preferred Shortest Route
+
 Now request for preferred route as below:
 
     $ map-tube --map 'London' --start 'Baker Street' --end 'Euston Square' --preferred
 
     Baker Street (Circle, Hammersmith & City, Metropolitan), Great Portland Street (Circle, Hammersmith & City, Metropolitan), Euston Square (Circle, Hammersmith & City, Metropolitan)
+
+=head2 Generate Full Map
+
+To generate entire map, follow the command below:
+
+    $ map-tube --map 'Delhi' --generate_map
+
+=head2 Generate Just a Line Map
+
+To generate just a particular line map, follow the command below:
+
+    $ map-tube --map 'London' --line 'Bakerloo' --generate_map
+
+=head2 Generate Line Mappings
+
+    $ map-tube --map 'London' --line 'Bakerloo' --line_mappings
+
+=head2 Generate Line Notes
+
+    $ map-tube --map 'London' --line 'Bakerloo' --line_notes
+
+=head2 General Error
 
 If encountered  invalid  map  or  missing map i.e not installed, you get an error
 message like below:
@@ -79,14 +109,6 @@ message like below:
 
     $ map-tube --map 'Kazan' --start 'Baker Street' --end 'Euston Square'
     ERROR: Missing Map [Kazan].
-
-To generate entire map, follow the command below:
-
-    $ map-tube --map 'Delhi' --generate_map
-
-To generate just a particular line map, follow the command below:
-
-    $ map-tube --map 'London' --line 'Bakerloo' --generate_map
 
 =head1 SUPPORTED MAPS
 
