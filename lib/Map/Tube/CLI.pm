@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION   = '0.49';
+$Map::Tube::CLI::VERSION   = '0.50';
 $Map::Tube::CLI::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.49
+Version 0.50
 
 =cut
 
@@ -265,7 +265,7 @@ sub run {
             print $line_map_table;
         }
         if ($self->line_notes) {
-            print _line_notes($map_object, $map, $line_map_notes);
+            print _line_notes($map_object, $map, $line, $line_map_notes);
         }
     }
     else {
@@ -316,13 +316,15 @@ sub _prepare_mapping_notes {
 }
 
 sub _line_notes {
-    my ($map, $map_name, $line_map_notes) = @_;
+    my ($map, $map_name, $line_name, $line_map_notes) = @_;
 
     my $all_lines = $map->get_lines;
     my $line_package = {};
     foreach my $line (@$all_lines) {
         next unless (scalar(@{$line->get_stations}));
-        $line_package->{$line->name} = 1;
+        my $_line_name = $line->name;
+        next if (uc($line_name) eq uc($_line_name));
+        $line_package->{$_line_name} = 1;
     }
 
     my $notes = "\n";
@@ -334,17 +336,38 @@ sub _line_notes {
         my $line  = shift @$lines;
         next unless defined $line;
 
-        $notes .= sprintf("\n=item * The station %s is also part of\n", $station);
-        $notes .= sprintf("          L<%s Line|Map::Tube::%s::Line::%s>\n", $line, $map_name, $line);
+        my $i = 1;
+        my $_notes .= sprintf("\n=item * The station \"%s\" is also part of\n", $station);
         foreach my $line (@$lines) {
             next unless (exists $line_package->{$line});
-            $notes .= sprintf("        | L<%s Line|Map::Tube::%s::Line::%s>\n", $line, $map_name, $line);
+            if ($i == 1) {
+                $_notes .= sprintf("          L<%s Line|Map::Tube::%s::Line::%s>\n", $line, $map_name, _guess_package_name($line));
+                $i++;
+            }
+            else {
+                $_notes .= sprintf("        | L<%s Line|Map::Tube::%s::Line::%s>\n", $line, $map_name, _guess_package_name($line));
+            }
+        }
+        if ($i > 1) {
+            $notes .= $_notes;
         }
     }
 
     $notes .= "\n=back\n";
 
     return $notes;
+}
+
+sub _guess_package_name {
+    my ($name) = @_;
+
+    my $_name;
+    foreach my $token (split /\s/,$name) {
+        next if ($token =~ /\&/);
+        $_name .= ucfirst(lc($token));
+    }
+
+    return $_name;
 }
 
 sub _add_notes {
