@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION   = '0.50';
+$Map::Tube::CLI::VERSION   = '0.51';
 $Map::Tube::CLI::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.50
+Version 0.51
 
 =cut
 
@@ -67,9 +67,9 @@ You can list all command line options by giving C<-h> flag.
 
 You can also ask for shortest route in London Tube Map as below:
 
-    $ map-tube --map 'London' --start 'Baker Street' --end 'Euston Square'
+    $ map-tube --map 'London' --start 'Baker Street' --end 'Wembley Park'
 
-    Baker Street (Bakerloo, Circle, Hammersmith & City, Jubilee, Metropolitan), Great Portland Street (Circle, Hammersmith & City, Metropolitan), Euston Square (Circle, Hammersmith & City, Metropolitan)
+    Baker Street (Bakerloo, Circle, Hammersmith & City, Jubilee, Metropolitan), Finchley Road (Jubilee, Metropolitan), Wembley Park (Jubilee, Metropolitan)
 
 =head2 Preferred Shortest Route
 
@@ -262,6 +262,7 @@ sub run {
         my ($line_map_table, $line_map_notes) = _prepare_mapping_notes($map_object, $line);
 
         if ($self->line_mappings) {
+            print sprintf("\n=head1 DESCRIPTION\n\n%s Metro Map: %s Line.\n\n", $map, $line);
             print $line_map_table;
         }
         if ($self->line_notes) {
