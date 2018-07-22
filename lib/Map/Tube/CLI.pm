@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION   = '0.51';
+$Map::Tube::CLI::VERSION   = '0.52';
 $Map::Tube::CLI::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.51
+Version 0.52
 
 =cut
 
@@ -333,11 +333,8 @@ sub _line_notes {
     $notes   .= "=over 2\n";
 
     foreach my $station (sort keys %$line_map_notes) {
-        my $lines = $line_map_notes->{$station};
-        my $line  = shift @$lines;
-        next unless defined $line;
-
         my $i = 1;
+        my $lines = $line_map_notes->{$station};
         my $_notes .= sprintf("\n=item * The station \"%s\" is also part of\n", $station);
         foreach my $line (@$lines) {
             next unless (exists $line_package->{$line});
