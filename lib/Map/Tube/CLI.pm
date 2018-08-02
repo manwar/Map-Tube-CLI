@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION   = '0.52';
+$Map::Tube::CLI::VERSION   = '0.53';
 $Map::Tube::CLI::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.52
+Version 0.53
 
 =cut
 
@@ -17,8 +17,10 @@ use 5.006;
 use utf8::all;
 use Data::Dumper;
 use MIME::Base64;
+use Map::Tube::Utils qw(is_valid_color);
 use Map::Tube::Exception::MissingStationName;
 use Map::Tube::Exception::InvalidStationName;
+use Map::Tube::Exception::InvalidBackgroundColor;
 use Map::Tube::Exception::InvalidLineName;
 use Map::Tube::Exception::MissingSupportedMap;
 use Map::Tube::Exception::FoundUnsupportedMap;
@@ -233,23 +235,30 @@ expect any parameter. Here is the code from the supplied C<map-tube> script.
 sub run {
     my ($self) = @_;
 
-    my $start = $self->start;
-    my $end   = $self->end;
-    my $map   = $self->map;
-    my $line  = $self->line;
+    my $start   = $self->start;
+    my $end     = $self->end;
+    my $map     = $self->map;
+    my $line    = $self->line;
+    my $bgcolor = $self->bgcolor;
+    my $map_obj = $self->{maps}->{uc($map)};
 
     if ($self->preferred) {
-        print $self->{maps}->{uc($map)}->get_shortest_route($start, $end)->preferred, "\n";
+        print $map_obj->get_shortest_route($start, $end)->preferred, "\n";
     }
     elsif ($self->generate_map) {
         my ($image_file, $image_data);
+
+        if (defined $bgcolor) {
+            $map_obj->bgcolor($bgcolor);
+        }
+
         if (defined $line) {
             $image_file = sprintf(">%s.png", $line);
-            $image_data = $self->{maps}->{uc($map)}->as_image($line);
+            $image_data = $map_obj->as_image($line);
         }
         else {
             $image_file = sprintf(">%s.png", $map);
-            $image_data = $self->{maps}->{uc($map)}->as_image;
+            $image_data = $map_obj->as_image;
         }
 
         open(my $IMAGE, $image_file);
@@ -258,19 +267,18 @@ sub run {
         close($IMAGE);
     }
     elsif ($self->line_mappings || $self->line_notes) {
-        my $map_object = $self->{maps}->{uc($map)};
-        my ($line_map_table, $line_map_notes) = _prepare_mapping_notes($map_object, $line);
+        my ($line_map_table, $line_map_notes) = _prepare_mapping_notes($map_obj, $line);
 
         if ($self->line_mappings) {
             print sprintf("\n=head1 DESCRIPTION\n\n%s Metro Map: %s Line.\n\n", $map, $line);
             print $line_map_table;
         }
         if ($self->line_notes) {
-            print _line_notes($map_object, $map, $line, $line_map_notes);
+            print _line_notes($map_obj, $map, $line, $line_map_notes);
         }
     }
     else {
-        print $self->{maps}->{uc($map)}->get_shortest_route($start, $end), "\n";
+        print $map_obj->get_shortest_route($start, $end), "\n";
     }
 }
 
@@ -401,10 +409,11 @@ sub _validate_param {
     my @caller = caller(0);
     @caller = caller(2) if $caller[3] eq '(eval)';
 
-    my $start = $self->start;
-    my $end   = $self->end;
-    my $map   = $self->map;
-    my $line  = $self->line;
+    my $start   = $self->start;
+    my $end     = $self->end;
+    my $map     = $self->map;
+    my $line    = $self->line;
+    my $bgcolor = $self->bgcolor;
 
     my $supported_maps = _supported_maps();
     Map::Tube::Exception::FoundUnsupportedMap->throw({
@@ -422,6 +431,14 @@ sub _validate_param {
         unless (exists $self->{maps}->{uc($map)});
 
     if ($self->generate_map) {
+        if (defined $bgcolor && !(is_valid_color($bgcolor))) {
+            Map::Tube::Exception::InvalidBackgroundColor->throw({
+                method      => __PACKAGE__."::_validate_param",
+                message     => "ERROR: Invalid background Color [$bgcolor].",
+                filename    => $caller[1],
+                line_number => $caller[2] });
+        }
+
         if (defined $line) {
             Map::Tube::Exception::InvalidLineName->throw({
                 method      => __PACKAGE__."::_validate_param",

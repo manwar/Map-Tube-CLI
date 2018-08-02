@@ -1,5 +1,10 @@
 Revision history for Map::Tube::CLI
 
+0.53  Thu Aug 02 10:00:00 2018
+      - Added command line option --bgcolor for map image.
+      - Upgraded dependency on Map::Tube v3.54.
+      - Upgraded dependency on Map::Tube::Exception v3.17.
+
 0.52  Sun Jul 22 10:00:00 2018
       - Fixed bug in line notes logic.
 
