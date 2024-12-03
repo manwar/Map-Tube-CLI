@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION   = '0.70';
+$Map::Tube::CLI::VERSION   = '0.71';
 $Map::Tube::CLI::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.70
+Version 0.71
 
 =cut
 
@@ -111,7 +111,7 @@ In case you want different background color to the map then you can try below:
 
     $ map-tube --map London --line Bakerloo --line_notes
 
-=head2 Generate Line Notes
+=head2 List lines for the given map
 
     $ map-tube --map London --list_lines
 
