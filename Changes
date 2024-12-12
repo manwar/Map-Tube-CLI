@@ -1,5 +1,9 @@
 Revision history for Map::Tube::CLI
 
+0.75  Thu Dec 12 13:40:00 2024
+      - Added support for 2 new maps: Hamburg and Rome.
+      - Upgraded dependency on Map::Tube v3.84.
+
 0.74  Thu Dec 12 11:40:00 2024
       - Updated pod w.r.t. Task::Map::Tube::Bundle.
 

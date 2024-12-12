@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION   = '0.74';
+$Map::Tube::CLI::VERSION   = '0.75';
 $Map::Tube::CLI::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.74
+Version 0.75
 
 =cut
 
@@ -160,6 +160,8 @@ sure you have the latest maps when you install.
 
 =item * L<Glasgow|Map::Tube::Glasgow>
 
+=item * L<Hamburg|Map::Tube::Hamburg>
+
 =item * L<Hongkong|Map::Tube::Hongkong>
 
 =item * L<Kazan|Map::Tube::Kazan>
@@ -199,6 +201,8 @@ sure you have the latest maps when you install.
 =item * L<Novosibirsk|Map::Tube::Novosibirsk>
 
 =item * L<Prague|Map::Tube::Prague>
+
+=item * L<Rome|Map::Tube::Rome>
 
 =item * L<SaintPetersburg|Map::Tube::SaintPetersburg>
 
@@ -324,6 +328,7 @@ sub _prepare_mapping_notes {
     my $map_notes = {};
     foreach (@station_names) {
         my $a = $station_names[$i];
+
         my $b = '';
         if ($i == 0) {
             $b = $station_names[$i+1];
@@ -535,6 +540,7 @@ sub _supported_maps {
         'DNIPROPETROVSK'  => 'Map::Tube::Dnipropetrovsk',
         'FRANKFURT'       => 'Map::Tube::Frankfurt',
         'GLASGOW'         => 'Map::Tube::Glasgow',
+        'HAMBURG'         => 'Map::Tube::Hamburg',
         'HONGKONG'        => 'Map::Tube::Hongkong',
         'KAZAN'           => 'Map::Tube::Kazan',
         'KHARKIV'         => 'Map::Tube::Kharkiv',
@@ -555,6 +561,7 @@ sub _supported_maps {
         'NIZHNYNOVGOROD'  => 'Map::Tube::NizhnyNovgorod',
         'NOVOSIBIRSK'     => 'Map::Tube::Novosibirsk',
         'PRAGUE'          => 'Map::Tube::Prague',
+        'ROME'            => 'Map::Tube::Rome',
         'SAINTPETERSBURG' => 'Map::Tube::SaintPetersburg',
         'SAMARA'          => 'Map::Tube::Samara',
         'SINGAPORE'       => 'Map::Tube::Singapore',
