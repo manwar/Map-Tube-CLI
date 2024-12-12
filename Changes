@@ -1,5 +1,8 @@
 Revision history for Map::Tube::CLI
 
+0.77  Thu Dec 12 16:10:00 2024
+      - Handle unidirection route for switch --line_mappings.
+
 0.76  Thu Dec 12 14:40:00 2024
       - Added switch --force to try unsupported map.
 

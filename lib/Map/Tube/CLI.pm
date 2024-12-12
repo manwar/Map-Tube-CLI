@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION   = '0.76';
+$Map::Tube::CLI::VERSION   = '0.77';
 $Map::Tube::CLI::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.76
+Version 0.77
 
 =cut
 
@@ -347,17 +347,8 @@ sub _prepare_mapping_notes {
     my $map_notes = {};
     foreach (@station_names) {
         my $a = $station_names[$i];
-
-        my $b = '';
-        if ($i == 0) {
-            $b = $station_names[$i+1];
-        }
-        elsif ($i == (@station_names-1)) {
-            $b = $station_names[$i-1];
-        }
-        else {
-            $b = sprintf("%s, %s", $station_names[$i-1], $station_names[$i+1]);
-        }
+        my $linked_stations = $map->get_linked_stations($a);
+        my $b = join(", ", @$linked_stations);
 
         $map_table->addRow($a, $b);
 
