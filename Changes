@@ -1,5 +1,8 @@
 Revision history for Map::Tube::CLI
 
+0.74  Thu Dec 12 11:40:00 2024
+      - Updated pod w.r.t. Task::Map::Tube::Bundle.
+
 0.73  Thu Dec 12 11:29:00 2024
       - Updated pod w.r.t. Task::Map::Tube.
 

@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION   = '0.73';
+$Map::Tube::CLI::VERSION   = '0.74';
 $Map::Tube::CLI::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.73
+Version 0.74
 
 =cut
 
@@ -131,8 +131,8 @@ message like below:
 The command line parameter C<map> can take one of the following map names.  It is
 case insensitive i.e. 'London' and 'lOndOn' are the same.
 
-You could  use L<Task::Map::Tube> to install the supported maps. Please make sure
-you have the latest maps when you install.
+You could use L<Task::Map::Tube::Bundle> to install the supported maps.Please make
+sure you have the latest maps when you install.
 
 =over 4
 
