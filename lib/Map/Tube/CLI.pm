@@ -1,6 +1,6 @@
 package Map::Tube::CLI;
 
-$Map::Tube::CLI::VERSION   = '0.75';
+$Map::Tube::CLI::VERSION   = '0.76';
 $Map::Tube::CLI::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Map::Tube::CLI - Command Line Interface for Map::Tube::* map.
 
 =head1 VERSION
 
-Version 0.75
+Version 0.76
 
 =cut
 
@@ -59,6 +59,8 @@ You can list all command line options by giving C<-h> flag.
         --line_mappings   Generate line mappings
         --line_notes      Generate line notes
         --list_lines      List lines
+        --force           Force unsupported map (map name becomes case
+                          sensitive)
 
         --usage           show a short help message
         -h                show a compact help message
@@ -230,10 +232,27 @@ sub BUILD {
     my ($self) = @_;
 
     my $plugins = [ plugins ];
+    my $map = $self->{map};
     foreach my $plugin (@$plugins) {
         my $key = _map_key($plugin);
-        if (defined $key && (uc($self->{map}) eq $key)) {
+        if (defined $key && (uc($map) eq $key)) {
             $self->{maps}->{uc($key)} = $plugin->new;
+        }
+    }
+
+    if ($self->force) {
+        if ($map =~ /^[A-Za-z]+$/) {
+            $self->{maps}->{uc($map)} = "Map::Tube::$map"->new;
+        }
+        else {
+            my @caller = caller(0);
+            @caller = caller(2) if $caller[3] eq '(eval)';
+
+            Map::Tube::Exception::FoundUnsupportedMap->throw({
+                method      => __PACKAGE__."::BUILD",
+                message     => "ERROR: Can't force invalid map [$map].",
+                filename    => $caller[1],
+                line_number => $caller[2] });
         }
     }
 
@@ -442,6 +461,10 @@ sub _validate_param {
     my $bgcolor = $self->bgcolor;
 
     my $supported_maps = _supported_maps();
+    if ($self->force) {
+        $supported_maps->{uc($map)} = 'Map::Tube::'. $map;
+    }
+
     Map::Tube::Exception::FoundUnsupportedMap->throw({
         method      => __PACKAGE__."::_validate_param",
         message     => "ERROR: Unsupported Map [$map].",
