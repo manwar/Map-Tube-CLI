@@ -4,6 +4,7 @@ use 5.006;
 use strict;
 use warnings FATAL => 'all';
 use Test::More;
+plan skip_all => 'these tests are for authors only!' unless ($ENV{AUTHOR_TESTING} ||  $ENV{RELEASE_TESTING});
 
 # Ensure a recent version of Test::Pod
 my $min_tp = 1.22;

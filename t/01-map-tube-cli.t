@@ -59,13 +59,13 @@ Windrush
 eval { Map::Tube::CLI->new };
 like($@, qr/Missing Map Name/, 'Missing map argument');
 
-eval { Map::Tube::CLI->new({ map => 'X' }) };
+eval { Map::Tube::CLI->new({ map => 'XXX' }) };
 like($@, qr/ERROR: Unsupported Map/, 'Non-existent map');
 
-eval { Map::Tube::CLI->new({ map => 'London', start => 'Y', end => 'Baker Streeet' }) };
+eval { Map::Tube::CLI->new({ map => 'London', start => 'YYY', end => 'Baker Streeet' }) };
 like($@, qr/Invalid Station Name/, 'Non-existent start station');
 
-eval { Map::Tube::CLI->new({ map => 'London', start => 'Baker Street', end => 'Z' }) };
+eval { Map::Tube::CLI->new({ map => 'London', start => 'Baker Street', end => 'ZZZ' }) };
 like($@, qr/Invalid Station Name/i, 'Non-existent end station');
 
 eval { Map::Tube::CLI->new({ map => 'London', preferred => 1, end => 'Baker Street' }) };
@@ -74,13 +74,13 @@ like($@, qr/ERROR: Missing Station Name/i, 'Missing start station name');
 eval { Map::Tube::CLI->new({ map => 'London', preferred => 1, start => 'Baker Street' }) };
 like($@, qr/ERROR: Missing Station Name/, 'Missing end station name');
 
-eval { Map::Tube::CLI->new({ map => 'London', preferred => 1, start => 'Y', end => 'Baker Street' }) };
+eval { Map::Tube::CLI->new({ map => 'London', preferred => 1, start => 'YYY', end => 'Baker Street' }) };
 like($@, qr/Invalid Station Name/, 'Non-existent start station name');
 
-eval { Map::Tube::CLI->new({ map => 'London', preferred => 1, start => 'Baker Street', end => 'Z' }) };
+eval { Map::Tube::CLI->new({ map => 'London', preferred => 1, start => 'Baker Street', end => 'ZZZ' }) };
 like($@, qr/Invalid Station Name/, 'Non-existent end station name');
 
-eval { Map::Tube::CLI->new({ map => 'London', generate_map => 1, line => 'X' }) };
+eval { Map::Tube::CLI->new({ map => 'London', generate_map => 1, line => 'XXX' }) };
 like($@, qr/Invalid Line Name/, 'Non-existent line name');
 
 done_testing;

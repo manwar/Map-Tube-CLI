@@ -1,5 +1,13 @@
 Revision history for Map::Tube::CLI
 
+v0.86.0 Mon Jul 06 13:00:00 2026
+      - Added option --fuzzy/-F for fuzzy station name matching.
+      - Added option --penalty/-p to change hop count penalty for line changes.
+      - Promoted private method _supported_maps() to public method supported_maps().
+      - More minor code optimisations.
+      - Bumped required Perl version zo 5.014 (in accordance with Map::Tube itself).
+      - Augmented tests.
+
 v0.85.0 Wed Jun 10 01:45:00 2026 (GWS)
       This release prepared by @GWS
       - Updated README.
